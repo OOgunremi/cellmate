@@ -8,7 +8,7 @@ const Layout = ({children}) => {
     <div className='layout'>
       <Head>
         <title >
-          koboClicks
+          cellMate
         </title>
       </Head>
       <header>
