@@ -4,7 +4,7 @@
     "name": "sanity"
   },
   "api": {
-    "projectId": "dy0dag2w",
+    "projectId": "insert projectId here from sanity",
     "dataset": "production"
   },
   "plugins": [
