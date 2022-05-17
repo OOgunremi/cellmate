@@ -26,15 +26,25 @@ export default {
         maxLength: 80
       }
     },
-    {
-      name: 'price',
-      title: 'Price',
-      type: 'number',
+    { 
+      name: 'brand',
+      title: 'Brand',
+      type: 'string',
     },
     {
       name: 'description',
       title: 'Description',
       type: 'string',
-    }
+    },
+    {
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+    },
+    { 
+      name: 'quantity',
+      title: 'Quantity',
+      type: 'number',
+    },
   ]
 }
