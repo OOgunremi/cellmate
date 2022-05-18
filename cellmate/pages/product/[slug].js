@@ -8,11 +8,10 @@ import {
 } from "react-icons/ai";
 import { Product } from "../../components.js";
 import { useStateContext } from "../../context/StateContext";
-import toast from "react-hot-toast";
 
 const ProductDetails = ({ product, products }) => {
   const [index, setIndex] = useState(0);
-  const { image, name, description, price, quantity } = product;
+  const { image, name, description, price, stock } = product;
   const { incQty, decQty, qty, onAdd, setShowCart } = useStateContext();
 
   const handleBuyNow = () => {
@@ -59,7 +58,9 @@ const ProductDetails = ({ product, products }) => {
           <h4>Details</h4>
           <p>{description}</p>
           <p className="price"> ${price} </p>
-          <h4>{quantity} in Stock</h4>
+          {stock > 10 && <h4>{stock} in Stock</h4>}
+          {stock <= 10 && stock > 0 && <h4>Only {stock} in Stock</h4>}
+          {stock === 0 && <h4>Out of Stock</h4>}
           <div className="quantity">
             <h3>Quantity</h3>
             <p className="quantity-desc">
@@ -67,22 +68,26 @@ const ProductDetails = ({ product, products }) => {
                 <AiOutlineMinus />
               </span>
               <span className="num">{qty}</span>
-              <span className="plus" onClick={incQty}>
+              <span className="plus" onClick={() => incQty(product)}>
                 <AiOutlinePlus />
               </span>
             </p>
           </div>
           <div className="buttons">
             <button
-              className="add-to-cart"
+              className={stock === 0 ? "add-to-cart no-stock" : "add-to-cart"}
               type="button"
+              disabled={stock === 0}
               onClick={() => onAdd(product, qty)}
             >
-              {" "}
               Add to Cart
             </button>
-            <button className="buy-now" type="button" onClick={handleBuyNow}>
-              {" "}
+            <button
+              className={stock === 0 ? "buy-now no-stock" : "buy-now"}
+              type="button"
+              disabled={stock === 0}
+              onClick={handleBuyNow}
+            >
               Buy Now
             </button>
           </div>
@@ -127,9 +132,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
-
-  const bannerQuery = '*[_type == "banner"]';
-  const banners = await client.fetch(bannerQuery);
 
   return {
     props: { products, product },
