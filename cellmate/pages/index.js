@@ -17,6 +17,12 @@ const Home = ({ products, banners }) => {
       .slice(0, 3)
       .map((product) => <Product key={product._id} product={product} />);
   };
+  const otherPhones = () => {
+    return products
+      ?.filter((product) => product.stock > 0)
+      .slice(3, 10)
+      .map((product) => <Product key={product._id} product={product} />);
+  };
 
   return (
     <>
@@ -26,6 +32,11 @@ const Home = ({ products, banners }) => {
         <p>Showing the top rated Mobiles</p>
       </div>
       <div className="products-container">{showBestSellingPhones()}</div>
+      <div className="products-heading">
+        <h2>Other Mobiles</h2>
+        <p>Maybe you prefer these...</p>
+      </div>
+      <div className="products-container">{otherPhones()}</div>
       <FooterBanner footerBanner={banners.length && banners[0]} />
     </>
   );
