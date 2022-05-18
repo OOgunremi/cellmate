@@ -59,7 +59,7 @@ const ProductDetails = ({ product, products }) => {
           <p>{description}</p>
           <p className="price"> ${price} </p>
           {stock > 10 && <h4>{stock} in Stock</h4>}
-          {stock <= 10 && stock > 0 && <h4>Only {stock} in Stock</h4>}
+          {stock <= 10 && stock > 0 && <h4>Only {stock} Left in Stock!!!</h4>}
           {stock === 0 && <h4>Out of Stock</h4>}
           <div className="quantity">
             <h3>Quantity</h3>
