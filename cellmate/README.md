@@ -32,3 +32,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# PRISMA Setup and Usage
+
+1. run `npm i` or `npm install` to install the new packages added to package.json (prisma and @prisma/client)
+2. start up vagrant
+3. copy `.env.example` to `.env` and fill in the details - look at the
+4. set the 'datbase name' in `.env` to be 'cellmate'
+5. run `npx prisma init`
+6. run `npx prisma migrate dev`
+7. run `npm run seed` to populate the datbase with default user information
+8. can run the prisma studio `npx prisma studio` to see the database and confirm the default test users are in the User table
