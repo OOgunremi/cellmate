@@ -6,19 +6,21 @@ import { useStateContext } from '../context/StateContext';
 const Home = ({products, banners}) => {
 
 
-  const { isSearchedItem, setIsSearchedItem, searchInput, setSearchInput, } = useStateContext()
+  const { searchInput, setSearchInput, } = useStateContext()
   
-  if (isSearchedItem) return  (  <>
+  if (searchInput) return  (  
+  <>
     <HeaderBanner headerBanner={banners.length && banners[0]}/>
       <div  className='products-heading'>
         <h2>Searched Mobiles</h2>
 
       </div>
       <div className='products-container'>
-        {products?.map((product) => <Product key={product._id} product={searchInput} />)}
+        {products?.filter(product => product.name.includes(searchInput))
+        .map((product) => <Product key={product._id} product={product} />)}
       </div>
     <FooterBanner footerBanner={banners.length && banners[0]}/>
-    </>)
+  </>)
   
   
   return (

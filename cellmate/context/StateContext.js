@@ -73,8 +73,6 @@ export const StateContext = ({children}) => {
   return (
   <Context.Provider
     value={{
-      isSearchedItem,
-      setIsSearchedItem,
       searchInput,
       setSearchInput, 
       showCart, 
