@@ -37,6 +37,10 @@ const Home = ({ products, banners }) => {
         <p>Maybe you prefer these...</p>
       </div>
       <div className="products-container">{otherPhones()}</div>
+      {/* 
+        // ! the limit of the number of extra phones shown in 7 in the other mobiles section, can be modified above
+        // ! may need to add a button here to go to the search page to let the user look at the other phones that they might want 
+      */}
       <FooterBanner footerBanner={banners.length && banners[0]} />
     </>
   );
