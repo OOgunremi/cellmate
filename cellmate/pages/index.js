@@ -1,9 +1,27 @@
 import React from 'react';
 import { Cart, Product, Layout, Navbar, Footer, FooterBanner, HeaderBanner } from '../components.js';
 import { client } from '../lib/client.js'; 
+import { useStateContext } from '../context/StateContext';
 
-const Home = ({products, banners}) => (
+const Home = ({products, banners}) => {
 
+
+  const { isSearchedItem, setIsSearchedItem, searchInput, setSearchInput, } = useStateContext()
+  
+  if (isSearchedItem) return  (  <>
+    <HeaderBanner headerBanner={banners.length && banners[0]}/>
+      <div  className='products-heading'>
+        <h2>Searched Mobiles</h2>
+
+      </div>
+      <div className='products-container'>
+        {products?.map((product) => <Product key={product._id} product={searchInput} />)}
+      </div>
+    <FooterBanner footerBanner={banners.length && banners[0]}/>
+    </>)
+  
+  
+  return (
   <>
   <HeaderBanner headerBanner={banners.length && banners[0]}/>
     <div  className='products-heading'>
@@ -15,7 +33,7 @@ const Home = ({products, banners}) => (
     </div>
   <FooterBanner footerBanner={banners.length && banners[0]}/>
   </>
-);
+)};
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
