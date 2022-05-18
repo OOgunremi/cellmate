@@ -9,3 +9,65 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// --- SETUP TABLES IN POSTGRESQL ---
+
+model User {
+  id          Int    @id @default(autoincrement())
+  first_name  String
+  last_name   String
+  address_1   String
+  city        String
+  postal_code String
+  country     String
+  telephone   String
+  email       String @unique
+
+  // default role for the user
+  role Role @default(USER)
+
+  // relations to other tables
+  orders Order[]
+}
+
+model Order {
+  id                Int      @id @default(autoincrement())
+  order_date        DateTime @default(now())
+  order_state       String
+  order_total_price String
+
+  // relations to other tables
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  order_details Order_Details[]
+}
+
+model Order_Details {
+  id       Int @id @default(autoincrement())
+  price    Int
+  quantity Int
+
+  // relations to other tables
+  Order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   Int?
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+}
+
+model Product {
+  id          Int    @id @default(autoincrement())
+  brand       String
+  price       Int
+  name        String
+  quantity    Int
+  description String @db.VarChar(500)
+
+  // relations to other tables
+  order_details Order_Details[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
