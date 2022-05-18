@@ -537,6 +537,9 @@ padding: 30px 65px;
   display: flex;
   gap: 30px;
 }
+.buttons .no-stock{
+  opacity: 0.5;
+}
 .buttons .add-to-cart{
   padding: 10px 20px;
   border: 1px solid #f02d34 ;
