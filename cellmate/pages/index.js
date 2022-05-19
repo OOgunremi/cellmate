@@ -36,7 +36,7 @@ const Home = ({ products, banners }) => {
         </div>
         <div className="products-container">
           {products
-            ?.filter((product) => product.name.includes(searchInput))
+            ?.filter((product) => product.name.match(searchInput))
             .map((product) => (
               <Product key={product._id} product={product} />
             ))}
