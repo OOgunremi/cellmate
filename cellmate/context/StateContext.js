@@ -59,7 +59,7 @@ export const StateContext = ({ children }) => {
     const index = cartItems.findIndex((product) => product._id === id);
     const newCartItems = cartItems.filter((item) => item._id !== id);
 
-    if (value === "inc") {
+    if (value === "inc" && foundProduct.stock > foundProduct.quantity) {
       const updateCart = [...newCartItems];
       updateCart.splice(index, 0, {
         ...foundProduct,
