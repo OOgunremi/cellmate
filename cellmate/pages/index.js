@@ -4,7 +4,18 @@ import { client } from '../lib/client.js';
 import { useStateContext } from '../context/StateContext';
 
 const Home = ({products, banners}) => {
-
+const showBestSellingPhones = () => {
+    return products
+      ?.filter((product) => product.stock > 0)
+      .slice(0, 3)
+      .map((product) => );
+  };
+  const otherPhones = () => {
+    return products
+      ?.filter((product) => product.stock > 0)
+      .slice(3, 10)
+      .map((product) => );
+  };
 
   const { searchInput, setSearchInput, } = useStateContext()
   
@@ -29,13 +40,26 @@ const Home = ({products, banners}) => {
     <div  className='products-heading'>
       <h2>Best Selling Mobiles</h2>
       <p>Showing the top rated Mobiles</p>
-    </div>
-    <div className='products-container'>
-      {products?.map((product) => <Product key={product._id} product={product} />)}
-    </div>
+    {showBestSellingPhones()}
+
+
+      
+        Other Mobiles
+        Maybe you prefer these...
+
+
+      
+
+      {otherPhones()}
+
+      {/* 
+        // ! the limit of the number of extra phones shown in 7 in the other mobiles section, can be modified above
+        // ! may need to add a button here to go to the search page to let the user look at the other phones that they might want 
+      */}
   <FooterBanner footerBanner={banners.length && banners[0]}/>
   </>
 )};
+
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
@@ -44,8 +68,8 @@ export const getServerSideProps = async () => {
   const banners = await client.fetch(bannerQuery);
 
   return {
-    props: { products, banners }
-  }
-}
+    props: { products, banners },
+  };
+};
 
-export default Home
+export default Home;
