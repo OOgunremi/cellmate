@@ -25,9 +25,27 @@ const Home = ({ products, banners }) => {
       .map((product) => <Product key={product._id} product={product} />);
   };
 
-  const { searchInput, setSearchInput } = useStateContext();
+  const { searchInput, setSearchInput, advSearchInput, setAdvSearchInput } = useStateContext();
 
   if (searchInput)
+    return (
+      <>
+  
+        <div className="products-heading">
+          <h2>Searched Result</h2>
+        </div>
+        <div className="products-container">
+          {products
+            ?.filter((product) => product.name.match(searchInput))
+            .map((product) => (
+              <Product key={product._id} product={product} />
+            ))}
+        </div>
+        <FooterBanner footerBanner={banners.length && banners[0]} />
+      </>
+    );
+
+  if (advSearchInput[0])
     return (
       <>
   
