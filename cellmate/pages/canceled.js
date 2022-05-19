@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineQuestion } from "react-icons/ai";
 
 import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "../lib/util";
@@ -20,7 +20,7 @@ const Success = () => {
     <div className="success-wrapper">
       <div className="success">
         <p className="icon">
-          <AiOutlineQuestionCircle />
+          <AiOutlineQuestion />
         </p>
         <h2>
           Forgot to add something to your cart? Shop around then come back to
