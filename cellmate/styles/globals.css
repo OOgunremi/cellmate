@@ -28,10 +28,17 @@ width: 100%;
 }
 
 .navbar-container{
+  position: fixed;
   display: flex;
   justify-content: space-between;
-  margin: 6px 18px;
-  position: relative;
+  margin: -10px -10px 0px 0px;
+  height: 40px;
+  width: 100%;
+  background-color: rgb(230, 213, 213);
+  z-index: 200;
+}
+.search-box{
+  margin-top: 7px;
 }
 .marquee-text{
   font-size: 29px;
@@ -66,18 +73,22 @@ width: 100%;
     margin-left: 6px;
 }
 .logo{
-  color: rgb(95, 108, 148);
+  margin: 5px;
+  color: rgb(47, 55, 80);
   font-size: 18px;
   font-weight: 600;
+  margin-left: 20px;
 }
 .cart-icon{
   font-size: 25px;
-  color: rgb(43, 31, 31);
+  color: rgb(125, 81, 81);
   cursor: pointer;
   position: relative;
   transition: transform .4s ease;
   border: none;
   background-color: transparent;
+  margin: 7px;
+  margin-right: 30px;
 }
 .cart-icon:hover{
   transform: scale(1.1,1.1);
@@ -154,8 +165,8 @@ width: 100%;
   }
 
 .hero-banner-container{
-  z-index: -1;
-  top: -80px;
+
+  top: -20px;
   border-radius: 15px;
   position: relative;
   height: 450px;
@@ -331,7 +342,6 @@ flex-direction: column;
   float: right;
   padding: 40px 10px;
   position: relative;
-  
 }
 
 .footer-container{
@@ -345,7 +355,6 @@ flex-direction: column;
   align-items: center;
   gap: 10px;
   justify-content: center;
-
 }
 .footer-container .icons{
   font-size: 30px;

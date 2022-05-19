@@ -30,9 +30,9 @@ const Home = ({ products, banners }) => {
   if (searchInput)
     return (
       <>
-        <HeaderBanner headerBanner={banners.length && banners[0]} />
+  
         <div className="products-heading">
-          <h2>Searched Mobiles</h2>
+          <h2>Searched Result</h2>
         </div>
         <div className="products-container">
           {products
