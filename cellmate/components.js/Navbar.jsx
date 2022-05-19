@@ -12,8 +12,8 @@ const Navbar = () => {
         <Link href={'/'}>CellMate</Link>
       </p>
    
-        <label>
-          Search: <input type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
+        <label className='search-box'>
+          <input placeholder='Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
         </label>
       <button type='button' className='cart-icon' onClick={() =>setShowCart(true)}>
         <AiOutlineShopping/>
