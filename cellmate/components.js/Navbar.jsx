@@ -13,8 +13,12 @@ const Navbar = () => {
       </p>
    
         <label className='search-box'>
-          <input placeholder='Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
+          <input placeholder='Quick Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
         </label>
+        <p className='advance-search'>
+        <Link href={'/search'}>Advance Search</Link>
+      </p>
+        
       <button type='button' className='cart-icon' onClick={() =>setShowCart(true)}>
         <AiOutlineShopping/>
         <span className='cart-item-qty'>{totalQuantities}</span>
