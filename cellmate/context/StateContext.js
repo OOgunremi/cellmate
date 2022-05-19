@@ -6,9 +6,12 @@ const Context = createContext();
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [isSearchedItem , setIsSearchedItem ] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
   let foundProduct;
   let index;
 
@@ -89,23 +92,25 @@ export const StateContext = ({ children }) => {
   };
 
   return (
-    <Context.Provider
-      value={{
-        showCart,
-        setShowCart,
-        setCartItems,
-        setTotalPrice,
-        setTotalQuantities,
-        cartItems,
-        totalPrice,
-        totalQuantities,
-        qty,
-        decQty,
-        incQty,
-        onAdd,
-        toggleCartItemQuantity,
-        onRemove,
-      }}
+  <Context.Provider
+    value={{
+      searchInput,
+      setSearchInput, 
+      showCart, 
+      setShowCart,
+      setCartItems,
+      setTotalPrice,
+      setTotalQuantities,
+      cartItems, 
+      totalPrice, 
+      totalQuantities, 
+      qty, 
+      decQty, 
+      incQty, 
+      onAdd,
+      toggleCartItemQuantity,
+      onRemove
+    }}
     >
       {children}
     </Context.Provider>
