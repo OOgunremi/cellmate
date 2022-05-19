@@ -31,7 +31,7 @@ width: 100%;
   position: fixed;
   display: flex;
   justify-content: space-between;
-  margin: -10px -10px 0px 0px;
+  margin: -10px -10px 0px -10px;
   height: 40px;
   width: 100%;
   background-color: rgb(230, 213, 213);
