@@ -11,8 +11,9 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  // let foundProduct;
-  // let index;
+  const [advSearchInput, setAdvSearchInput] = useState([]);
+
+
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
@@ -97,6 +98,8 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        advSearchInput,
+        setAdvSearchInput,
         searchInput,
         setSearchInput,
         showCart,
