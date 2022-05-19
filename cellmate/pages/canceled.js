@@ -5,7 +5,7 @@ import { AiOutlineQuestion } from "react-icons/ai";
 import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "../lib/util";
 
-const Success = () => {
+const Canceled = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
   useEffect(() => {
@@ -17,8 +17,8 @@ const Success = () => {
   }, []);
 
   return (
-    <div className="success-wrapper">
-      <div className="success">
+    <div className="cancel-wrapper">
+      <div className="cancel">
         <p className="icon">
           <AiOutlineQuestion />
         </p>
@@ -42,4 +42,4 @@ const Success = () => {
   );
 };
 
-export default Success;
+export default Canceled;
