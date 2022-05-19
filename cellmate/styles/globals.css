@@ -40,6 +40,10 @@ width: 100%;
 .search-box{
   margin-top: 7px;
 }
+.advance-search{
+  margin-top: 7px;
+  color: rgb(47, 55, 80);
+}
 .marquee-text{
   font-size: 29px;
   font-weight: 600;
