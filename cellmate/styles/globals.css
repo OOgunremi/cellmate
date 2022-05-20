@@ -486,11 +486,10 @@ padding: 30px 65px;
  color: #324d67;
 
 }
-
 .product-detail-image{
   border-radius: 15px;
   background-color: #ebebeb;
-  width: auto;
+  width: 400px;
   height: 400px;
   cursor: pointer;
   transition: .3s ease-in-out;
