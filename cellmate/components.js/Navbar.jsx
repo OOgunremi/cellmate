@@ -5,7 +5,18 @@ import { Cart } from '.';
 import { useStateContext } from '../context/StateContext';
 
 const Navbar = () => {
-  const { showCart, setShowCart, setSearchInput, totalQuantities } = useStateContext();
+  const { 
+    showCart, 
+    setShowCart, 
+    setSearchInput,
+    toggleAdvSearch, 
+    setToggleAdvSearch, 
+    totalQuantities, 
+    setAdvSearchName,
+    setAdvSearchBrand,
+    setAdvSearchMaxPrice,
+    setAdvSearchMinPrice 
+  } = useStateContext();
   return (
     <div className='navbar-container'>
       <p className='logo'>
@@ -15,9 +26,15 @@ const Navbar = () => {
         <label className='search-box'>
           <input placeholder='Quick Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
         </label>
-        <p className='advance-search'>
-        <Link href={'/search'}>Advance Search</Link>
-      </p>
+        { toggleAdvSearch && <button className='advance-search' 
+        onClick={() => {setToggleAdvSearch(false)  ,  setAdvSearchName(''), 
+        setAdvSearchBrand(''),
+        setAdvSearchMaxPrice(1000000),
+        setAdvSearchMinPrice(0)}
+
+        } >Return</button>}
+
+        { !toggleAdvSearch && <button className='advance-search' onClick={() => setToggleAdvSearch(true)} >Advance Search</button>}
         
       <button type='button' className='cart-icon' onClick={() =>setShowCart(true)}>
         <AiOutlineShopping/>
