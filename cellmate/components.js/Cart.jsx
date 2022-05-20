@@ -26,6 +26,7 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
+    // ! this is not the best implementation, would have been better if the quantity is only decremented if the purchase is known to be successful - STRECH work
     const sanityCheck = await fetch("/api/sanityUpdate", {
       method: "POST",
       headers: {

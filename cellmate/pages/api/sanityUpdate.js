@@ -2,22 +2,15 @@ import { client } from "../../lib/client";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log("req body", req.body);
-
     try {
-      const test = await client
-        .patch(req.body[0]._id)
-        .dec({ stock: 1 })
-        .commit()
-        .then((update) => {
-          console.log("Hurray, it is updated! New document:");
-          console.log(update);
-        })
-        .catch((err) => {
-          console.error("Oh no, the update failed: ", err.message);
-        });
+      for (const product of req.body) {
+        await client
+          .patch(product._id)
+          .dec({ stock: product.quantity })
+          .commit();
+      }
 
-      res.status(200).json(test);
+      res.status(200).json({});
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }
