@@ -510,6 +510,7 @@ padding: 30px 65px;
   width: 70px;
   height: 70px;
   cursor: pointer;
+  object-fit: scale-down;
 }
 
 .selected-image{
