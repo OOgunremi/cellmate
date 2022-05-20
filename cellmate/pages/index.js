@@ -24,8 +24,25 @@ const Home = ({ products, banners }) => {
       .slice(3, 10)
       .map((product) => <Product key={product._id} product={product} />);
   };
+  const handleSubmit = (event) => {
+    const formData = new FormData(event.currentTarget);
+    event.preventDefault();
+    const array = [];
+    for (let [key, value] of formData.entries()) {
+      array.push(value)
+    }
+    setAdvSearchInput(array)
+    console.log(array);
+  };
 
-  const { searchInput, setSearchInput } = useStateContext();
+  const { searchInput, 
+    advSearchInput, setAdvSearchInput, 
+    toggleAdvSearch,  setToggleAdvSearch, 
+    advSearchName, setAdvSearchName, 
+    advSearchBrand, setAdvSearchBrand,
+    advSearchMaxPrice, setAdvSearchMaxPrice,
+    advSearchMinPrice, setAdvSearchMinPrice
+   } = useStateContext();
 
   if (searchInput)
     return (
@@ -44,6 +61,47 @@ const Home = ({ products, banners }) => {
         <FooterBanner footerBanner={banners.length && banners[0]} />
       </>
     );
+
+  if (toggleAdvSearch) {
+    // setAdvSearchInput([])
+    return (
+      <>
+        <div className="products-heading">
+        <div className="footer-container">
+          <h2>Advance Search</h2>
+            <form onSubmit={handleSubmit}>
+              <label>Name:</label> <input type="text" 
+              name="name"  placeholder="name" 
+              onChange={(e)=> setAdvSearchName(e.target.value)} /> &emsp;
+              
+              <label>Brand:</label> <input type="text" 
+              name="brand" placeholder="brand" 
+              onChange={(e)=> setAdvSearchBrand(e.target.value)} /> &emsp;
+
+              <label>Min Price:</label> <input type="integer" 
+              name="min-price" placeholder="price" 
+              onChange={(e)=> setAdvSearchMinPrice(e.target.value)} /> &emsp;
+
+              <label>Max Price:</label> <input type="integer" 
+              name="max-price" placeholder="price" 
+              onChange={(e)=> setAdvSearchMaxPrice(e.target.value)} /> &emsp;
+
+              <button type="submit"> Search </button>
+            </form>
+        </div>
+          <h2>Filtered Result</h2>
+        </div>
+        <div className="products-container">
+          {products
+               ?.filter((product) => product.brand.match(advSearchName) 
+               && product.brand.match(advSearchBrand) && product.price <= advSearchMaxPrice && product.price >= advSearchMinPrice)
+            .map((product) => (
+              <Product key={product._id} product={product} />
+            ))}
+        </div>
+        <FooterBanner footerBanner={banners.length && banners[0]} />
+      </>
+    );}
 
   return (
     <>
@@ -66,6 +124,7 @@ const Home = ({ products, banners }) => {
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
+  console.log(products)
 
   const bannerQuery = '*[_type == "banner"]';
   const banners = await client.fetch(bannerQuery);
