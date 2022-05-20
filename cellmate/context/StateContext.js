@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 const Context = createContext();
@@ -13,13 +13,27 @@ export const StateContext = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [advSearchInput, setAdvSearchInput] = useState([]);
   const [toggleAdvSearch, setToggleAdvSearch] = useState(false);
-  const [advSearchName, setAdvSearchName] = useState('');
-  const [advSearchBrand, setAdvSearchBrand] = useState('');
-  const [ advSearchMaxPrice, setAdvSearchMaxPrice ] = useState(100000);
-  const [ advSearchMinPrice, setAdvSearchMinPrice ] = useState(0);
+  const [advSearchName, setAdvSearchName] = useState("");
+  const [advSearchBrand, setAdvSearchBrand] = useState("");
+  const [advSearchMaxPrice, setAdvSearchMaxPrice] = useState(100000);
+  const [advSearchMinPrice, setAdvSearchMinPrice] = useState(0);
 
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      setCartItems(JSON.parse(localStorage.getItem("cart")).cartItems);
+      setTotalPrice(JSON.parse(localStorage.getItem("cart")).totalPrice);
+      setTotalQuantities(
+        JSON.parse(localStorage.getItem("cart")).totalQuantities
+      );
+    }
+  }, []);
 
-
+  useEffect(() => {
+    localStorage.setItem(
+      "cart",
+      JSON.stringify({ cartItems, totalPrice, totalQuantities })
+    );
+  }, [cartItems]);
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
@@ -104,20 +118,34 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        advSearchInput, setAdvSearchInput,
-        searchInput, setSearchInput,
-        showCart, setShowCart,
-        cartItems, setCartItems,
-        totalPrice, setTotalPrice,
-        totalQuantities, setTotalQuantities,
-        qty, decQty, incQty,
-        onAdd,onRemove,
+        advSearchInput,
+        setAdvSearchInput,
+        searchInput,
+        setSearchInput,
+        showCart,
+        setShowCart,
+        cartItems,
+        setCartItems,
+        totalPrice,
+        setTotalPrice,
+        totalQuantities,
+        setTotalQuantities,
+        qty,
+        decQty,
+        incQty,
+        onAdd,
+        onRemove,
         toggleCartItemQuantity,
-        toggleAdvSearch, setToggleAdvSearch,
-        advSearchName, setAdvSearchName,
-        advSearchBrand, setAdvSearchBrand,
-        advSearchMaxPrice, setAdvSearchMaxPrice,
-        advSearchMinPrice, setAdvSearchMinPrice
+        toggleAdvSearch,
+        setToggleAdvSearch,
+        advSearchName,
+        setAdvSearchName,
+        advSearchBrand,
+        setAdvSearchBrand,
+        advSearchMaxPrice,
+        setAdvSearchMaxPrice,
+        advSearchMinPrice,
+        setAdvSearchMinPrice,
       }}
     >
       {children}
@@ -125,4 +153,3 @@ export const StateContext = ({ children }) => {
   );
 };
 export const useStateContext = () => useContext(Context);
-
