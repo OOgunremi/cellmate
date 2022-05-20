@@ -26,9 +26,8 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
-    const stripe = await getStripe();
-
-    const response = await fetch("/api/stripe", {
+    // ! this is not the best implementation, would have been better if the quantity is only decremented if the purchase is known to be successful - STRECH work
+    const sanityCheck = await fetch("/api/sanityUpdate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,12 +35,17 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
 
+    const stripe = await getStripe();
+    const response = await fetch("/api/stripe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItems),
+    });
     if (response.statusCode === 500) return;
-
     const data = await response.json();
-
     toast.loading("Redirecting...");
-
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
