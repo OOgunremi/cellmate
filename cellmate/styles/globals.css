@@ -39,10 +39,12 @@ width: 100%;
 }
 .search-box{
   margin-top: 7px;
+  color: #1f405e;
 }
 .advance-search{
   margin-top: 7px;
-  color: rgb(47, 55, 80);
+  height: 25px;
+  color: #1f405e;
 }
 .marquee-text{
   font-size: 29px;

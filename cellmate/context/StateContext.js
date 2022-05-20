@@ -12,6 +12,12 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [advSearchInput, setAdvSearchInput] = useState([]);
+  const [toggleAdvSearch, setToggleAdvSearch] = useState(false);
+  const [advSearchName, setAdvSearchName] = useState('');
+  const [advSearchBrand, setAdvSearchBrand] = useState('');
+  const [ advSearchMaxPrice, setAdvSearchMaxPrice ] = useState(100000);
+  const [ advSearchMinPrice, setAdvSearchMinPrice ] = useState(0);
+
 
 
 
@@ -98,24 +104,20 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        advSearchInput,
-        setAdvSearchInput,
-        searchInput,
-        setSearchInput,
-        showCart,
-        setShowCart,
-        setCartItems,
-        setTotalPrice,
-        setTotalQuantities,
-        cartItems,
-        totalPrice,
-        totalQuantities,
-        qty,
-        decQty,
-        incQty,
-        onAdd,
+        advSearchInput, setAdvSearchInput,
+        searchInput, setSearchInput,
+        showCart, setShowCart,
+        cartItems, setCartItems,
+        totalPrice, setTotalPrice,
+        totalQuantities, setTotalQuantities,
+        qty, decQty, incQty,
+        onAdd,onRemove,
         toggleCartItemQuantity,
-        onRemove,
+        toggleAdvSearch, setToggleAdvSearch,
+        advSearchName, setAdvSearchName,
+        advSearchBrand, setAdvSearchBrand,
+        advSearchMaxPrice, setAdvSearchMaxPrice,
+        advSearchMinPrice, setAdvSearchMinPrice
       }}
     >
       {children}
@@ -123,3 +125,4 @@ export const StateContext = ({ children }) => {
   );
 };
 export const useStateContext = () => useContext(Context);
+
