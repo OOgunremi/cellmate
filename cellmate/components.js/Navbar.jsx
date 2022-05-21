@@ -23,13 +23,13 @@ const Navbar = () => {
   const userInfo = () => {
     if (user) {
       return (
-        <div >
+        < >
           {/* <h4>Hello, {user.given_name}!</h4> */}
-          <a className="logo">
+          <a className="logout-button">
             {user.given_name ? `Hello, ${user.given_name}!` : "Hello There!"}
           </a>
           <a className="logout-button" href="/api/auth/logout">Logout?</a>
-        </div>
+        </>
       );
     }
     return (
