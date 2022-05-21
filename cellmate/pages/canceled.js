@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineQuestion } from "react-icons/ai";
-
-import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "../lib/util";
 
 const Canceled = () => {
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+  useEffect(() => {
+    runFireworks();
+  }, []);
 
   return (
     <div className="cancel-wrapper">
