@@ -23,14 +23,17 @@ const Navbar = () => {
   const userInfo = () => {
     if (user) {
       return (
-        <>
-          <h4>Hello, {user.name}!</h4>
-          <a href="/api/auth/logout">Logout</a>
-        </>
+        <div>
+          <h4>Hello, {user.given_name}!</h4>
+          <a href="/api/auth/logout">Logout?</a>
+        </div>
       );
     }
-
-    return <a href="/api/auth/login">Login</a>;
+    return (
+      <p className="logo">
+        <a href="/api/auth/login">Login</a>
+      </p>
+    );
   };
 
   return (
