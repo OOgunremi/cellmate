@@ -28,6 +28,8 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
+    toast.loading("Redirecting...");
+
     // update the stock amount in sanity
     const sanityCheck = await fetch("/api/sanityUpdate", {
       method: "POST",
@@ -48,7 +50,7 @@ const Cart = () => {
     });
     if (response.statusCode === 500) return;
     const data = await response.json();
-    toast.loading("Redirecting...");
+
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
