@@ -43,3 +43,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 6. run `npx prisma migrate dev`
 7. run `npm run seed` to populate the datbase with default user information
 8. can run the prisma studio `npx prisma studio` to see the database and confirm the default test users are in the User table
+
+# Stripe Update and Changes
+
+1. there are changes on the stipe shipping rates and may need to be updated in the stripe.js file
+
+# AUTH0 Setup and Usage
+
+1. run `npm i` or `npm install` to install the new packages added to package.json (prisma and @prisma/client)
+2. follow along the readme file here: https://github.com/auth0/nextjs-auth0
+3. populate the AUTH0 env settings file in the `.env.example` file and put it in your `.env` file
+4. default environment variables can be provided
