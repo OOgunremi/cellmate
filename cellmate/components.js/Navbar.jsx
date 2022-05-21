@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping } from 'react-icons/ai';
+import { AiOutlineShopping, AiOutlineSearch } from 'react-icons/ai';
 import { Cart } from '.';
 import { useStateContext } from '../context/StateContext';
+
 
 const Navbar = () => {
   const { 
@@ -19,22 +20,26 @@ const Navbar = () => {
   } = useStateContext();
   return (
     <div className='navbar-container'>
-      <p className='logo'>
-        <Link href={'/'}>CellMate</Link>
-      </p>
-   
-        <label className='search-box'>
-          <input placeholder='Quick Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
-        </label>
-        { toggleAdvSearch && <button className='advance-search' 
-        onClick={() => {setToggleAdvSearch(false)  ,  setAdvSearchName(''), 
+      <p className=''>
+        <button className='logo' onClick={() => {setToggleAdvSearch(false),  setAdvSearchName(''), 
         setAdvSearchBrand(''),
         setAdvSearchMaxPrice(1000000),
         setAdvSearchMinPrice(0)}
+        } ><Link href={'/'} >CellMate</Link></button>
+      </p>
+   
+        {/* <label className='search-box'>
+          <AiOutlineSearch />
+          <input placeholder='Quick Search' type="text" name="name" onChange={(e)=> setSearchInput(e.target.value)} />
+        </label> */}
+        { toggleAdvSearch && <button className='advance-search' 
+        onClick={() => { setToggleAdvSearch(true), setAdvSearchName(''), 
+        setAdvSearchBrand(''),
+        setAdvSearchMaxPrice(1000000),
+        setAdvSearchMinPrice(0)}
+        } ><Link href={'/'} >Search</Link></button>}
 
-        } >Return</button>}
-
-        { !toggleAdvSearch && <button className='advance-search' onClick={() => setToggleAdvSearch(true)} >Advance Search</button>}
+        { !toggleAdvSearch && <button className='advance-search' onClick={() => setToggleAdvSearch(true)} >Search</button>}
         
       <button type='button' className='cart-icon' onClick={() =>setShowCart(true)}>
         <AiOutlineShopping/>

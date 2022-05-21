@@ -44,23 +44,23 @@ const Home = ({ products, banners }) => {
     advSearchMinPrice, setAdvSearchMinPrice
    } = useStateContext();
 
-  if (searchInput)
-    return (
-      <>
+  // if (searchInput)
+  //   return (
+  //     <>
   
-        <div className="products-heading">
-          <h2>Searched Result</h2>
-        </div>
-        <div className="products-container">
-          {products
-            ?.filter((product) => product.name.match(searchInput))
-            .map((product) => (
-              <Product key={product._id} product={product} />
-            ))}
-        </div>
-        <FooterBanner footerBanner={banners.length && banners[0]} />
-      </>
-    );
+  //       <div className="products-heading">
+  //         <h2>Searched Result</h2>
+  //       </div>
+  //       <div className="products-container">
+  //         {products
+  //           ?.filter((product) => product.name.match(searchInput))
+  //           .map((product) => (
+  //             <Product key={product._id} product={product} />
+  //           ))}
+  //       </div>
+  //       <FooterBanner footerBanner={banners.length && banners[0]} />
+  //     </>
+  //   );
 
   if (toggleAdvSearch) {
     // setAdvSearchInput([])
@@ -68,28 +68,26 @@ const Home = ({ products, banners }) => {
       <>
         <div className="products-heading">
         <div className="footer-container">
-          <h2>Advance Search</h2>
+          <h2>Search</h2>
             <form onSubmit={handleSubmit}>
               <label>Name:</label> <input type="text" 
-              name="name"  placeholder="name" 
-              onChange={(e)=> setAdvSearchName(e.target.value)} /> &emsp;
+              name="name"  placeholder="name" value={advSearchName}
+              onChange={(e)=> setAdvSearchName(e.target.value) } /> &emsp;
               
               <label>Brand:</label> <input type="text" 
-              name="brand" placeholder="brand" 
+              name="brand" placeholder="brand" value={advSearchBrand}
               onChange={(e)=> setAdvSearchBrand(e.target.value)} /> &emsp;
 
               <label>Min Price:</label> <input type="integer" 
-              name="min-price" placeholder="price" 
+              name="min-price" placeholder="price" value={advSearchMinPrice}
               onChange={(e)=> setAdvSearchMinPrice(e.target.value)} /> &emsp;
 
               <label>Max Price:</label> <input type="integer" 
-              name="max-price" placeholder="price" 
+              name="max-price" placeholder="price" value={advSearchMaxPrice}
               onChange={(e)=> setAdvSearchMaxPrice(e.target.value)} /> &emsp;
-
-              <button type="submit"> Search </button>
             </form>
         </div>
-          <h2>Filtered Result</h2>
+         { <h2>Result</h2>}
         </div>
         <div className="products-container">
           {products
@@ -124,7 +122,7 @@ const Home = ({ products, banners }) => {
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
-  console.log(products)
+  // console.log(products)
 
   const bannerQuery = '*[_type == "banner"]';
   const banners = await client.fetch(bannerQuery);
