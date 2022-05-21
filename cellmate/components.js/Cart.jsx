@@ -13,8 +13,10 @@ import toast from "react-hot-toast";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
 import getStripe from "../lib/getStripe";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const Cart = () => {
+  const { user } = useUser();
   const cartRef = useRef();
   const {
     totalPrice,
@@ -26,7 +28,7 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
-    // ! this is not the best implementation, would have been better if the quantity is only decremented if the purchase is known to be successful - STRECH work
+    // update the stock amount in sanity
     const sanityCheck = await fetch("/api/sanityUpdate", {
       method: "POST",
       headers: {
@@ -35,13 +37,14 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
 
+    // process the order with stripe
     const stripe = await getStripe();
     const response = await fetch("/api/stripe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(cartItems),
+      body: JSON.stringify({ cartItems, user }),
     });
     if (response.statusCode === 500) return;
     const data = await response.json();
