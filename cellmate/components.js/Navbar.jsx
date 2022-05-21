@@ -28,12 +28,12 @@ const Navbar = () => {
           <a className="logout-button">
             {user.given_name ? `Hello, ${user.given_name}!` : "Hello There!"}
           </a>
-          <a className="logout-button" href="/api/auth/logout">Logout?</a>
+          <a className="advance-search" href="/api/auth/logout">Logout?</a>
         </>
       );
     }
     return (
-      <p className="logout-button">
+      <p className="advance-search">
         <a href="/api/auth/login">Login</a>
       </p>
     );

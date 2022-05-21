@@ -108,7 +108,6 @@ a {
 .logo:hover{
   transform: scale(1.2,1.2);
   color: #e4161d;
-  border-color: red;
   background-color: rgb(203, 203, 236);
 }
 .cart-icon{
