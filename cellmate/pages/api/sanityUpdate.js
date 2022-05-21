@@ -3,12 +3,14 @@ import { client } from "../../lib/client";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      for (const product of req.body) {
-        await client
-          .patch(product._id)
-          .dec({ stock: product.quantity })
-          .commit();
-      }
+      await Promise.all(
+        req.body.map(async (product) => {
+          await client
+            .patch(product._id)
+            .dec({ stock: product.quantity })
+            .commit();
+        })
+      );
 
       res.status(200).json({});
     } catch (err) {

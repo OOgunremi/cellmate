@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineQuestion } from "react-icons/ai";
-
-import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "../lib/util";
 
 const Canceled = () => {
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
-
   useEffect(() => {
-    localStorage.clear();
-    setCartItems([]);
-    setTotalPrice(0);
-    setTotalQuantities(0);
     runFireworks();
   }, []);
 
