@@ -8,14 +8,6 @@ import { runFireworks } from "../lib/util";
 const Canceled = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
-  useEffect(() => {
-    localStorage.clear();
-    setCartItems([]);
-    setTotalPrice(0);
-    setTotalQuantities(0);
-    runFireworks();
-  }, []);
-
   return (
     <div className="cancel-wrapper">
       <div className="cancel">
