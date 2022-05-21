@@ -290,7 +290,6 @@ width: 100%;
   .hero-banner-image { display: none } 
 }
 
-
 .desc{
 position: absolute;
 right: 50%;
@@ -340,17 +339,18 @@ color: #324d67;
   line-height: 1; 
   color: white;
   width: 100%;
-  margin-top: 120px;
+  margin-top: 140px;
 }
 .banner-desc{
   display: flex ;
   justify-content: space-between;
+  margin-top: -5%;
 }
 .banner-desc button{
   border-radius: 15px;
   padding: 10px 16px;
-  background-color: white;
-  color: red;
+  background-color: rgb(247, 6, 6);
+  color: white;
   border: none;
   margin-top: 0px;
   font-size: 18px;
@@ -361,26 +361,31 @@ color: #324d67;
   font-weight: 900;
   font-size: 80px;
   margin-left: 25px;
+  color: #324d67;
+  line-height: 1.2;
 }
 .banner-desc .left p{
-  margin:18px;
+  margin-left: 108px;
 }
-.footer-banner-image{
-  position: absolute;
-  /* top: -35%;
-  left: 8%; */
-  top: -25%;
-  left: 25%;
-}
+
 .banner-desc .right{
-  line-height: 1.4;
+  line-height: 2.7;
+
 }
 .banner-desc .right h3{
+  color:  red;
   font-weight: 800;
-  font-size: 60px;
+  font-size: 40px;
 }
 .banner-desc .right p{
   font-size: 18px;
+}
+#footer-banner-product-name{
+  font-size: 28px;
+  color: white;
+}
+#footer-left-bottom-text{
+  color: red;
 }
 .banner-desc .right .company-desc{
   font-size: 14px;
@@ -405,13 +410,16 @@ color: #324d67;
   padding: 40px 10px;
   position: relative;
 }
+.footer-image{
+  height: 255px;
+}
 
 .footer-container{
   color: #324d67;
   text-align: center;
   margin-top: 20px;
   padding: 30px 10px;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -419,7 +427,7 @@ color: #324d67;
   justify-content: center;
 }
 .footer-container .icons{
-  font-size: 30px;
+  font-size: 20px;
   display: flex;
   gap: 10px;
 }
