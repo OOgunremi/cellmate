@@ -40,6 +40,15 @@ export const StateContext = ({ children }) => {
       (item) => item._id === product._id
     );
 
+    // check that the order quantity does not exceed
+    if (
+      checkProductInCart &&
+      checkProductInCart.quantity + quantity > checkProductInCart.stock
+    ) {
+      toast.error(`Total order cannot exceed available stock. Sorry 😞`);
+      return;
+    }
+
     setTotalPrice(
       (prevTotalPrice) => prevTotalPrice + product.price * quantity
     );
