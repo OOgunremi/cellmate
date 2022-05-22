@@ -17,6 +17,8 @@ export const StateContext = ({ children }) => {
   const [advSearchBrand, setAdvSearchBrand] = useState("");
   const [advSearchMaxPrice, setAdvSearchMaxPrice] = useState(100000);
   const [advSearchMinPrice, setAdvSearchMinPrice] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("cart"))) {
@@ -146,6 +148,10 @@ export const StateContext = ({ children }) => {
         setAdvSearchMaxPrice,
         advSearchMinPrice,
         setAdvSearchMinPrice,
+        rating, 
+        setRating,
+        hoverRating,
+        setHoverRating,
       }}
     >
       {children}
