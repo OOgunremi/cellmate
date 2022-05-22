@@ -6,17 +6,27 @@ import {
   AiOutlineMinus,
   AiOutlinePlus,
 } from "react-icons/ai";
-import { Product } from "../../components.js";
+import { Product, Rating } from "../../components.js";
 import { useStateContext } from "../../context/StateContext";
 
 const ProductDetails = ({ product, products }) => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex ] = useState(0);
+  const [counter, setCounter ] = useState(15);
   const { image, name, description, price, stock } = product;
-  const { incQty, decQty, qty, onAdd, setShowCart } = useStateContext();
+  const { incQty, decQty, qty, onAdd, setShowCart, rating, setRating, hoverRating, setHoverRating } = useStateContext();
 
   const handleBuyNow = () => {
     onAdd(product, qty);
     setShowCart(true);
+  };
+  const onMouseEnter = (ind) =>{
+    setHoverRating(ind)
+  };
+  const onMouseLeave = () =>{
+    setHoverRating(0)
+  };
+  const onSaveRating = (ind) =>{
+    setRating(ind); setCounter((prev) => prev + 1)
   };
 
   return (
@@ -46,14 +56,17 @@ const ProductDetails = ({ product, products }) => {
         <div className="product-detail-desc">
           <h1>{name}</h1>
           <div className="reviews">
-            <div>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiOutlineStar />
-            </div>
-            <p>(20)</p>
+              {[1,2,3,4,5].map((ind) => {
+                return (
+                <Rating 
+                ind={ind}
+                rating={rating}
+                hoverRating={hoverRating}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                onSaveRating={onSaveRating} />
+              )})}
+            <p>{counter}</p>
           </div>
           <h4>Details</h4>
           <p>{description}</p>
