@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { client, urlFor } from "../../lib/client";
 import {
   AiFillStar,
@@ -8,25 +8,44 @@ import {
 } from "react-icons/ai";
 import { Product, Rating } from "../../components.js";
 import { useStateContext } from "../../context/StateContext";
+import { useRouter } from "next/router";
 
 const ProductDetails = ({ product, products }) => {
-  const [index, setIndex ] = useState(0);
-  const [counter, setCounter ] = useState(15);
+  const router = useRouter();
+  const [index, setIndex] = useState(0);
+  const [counter, setCounter] = useState(15);
   const { image, name, description, price, stock } = product;
-  const { incQty, decQty, qty, onAdd, setShowCart, rating, setRating, hoverRating, setHoverRating } = useStateContext();
+  const {
+    incQty,
+    decQty,
+    qty,
+    onAdd,
+    setShowCart,
+    rating,
+    setRating,
+    hoverRating,
+    setHoverRating,
+  } = useStateContext();
+
+  // force update with the server side render
+  useEffect(() => {
+    router.replace(router.asPath);
+  }, []);
 
   const handleBuyNow = () => {
     onAdd(product, qty);
     setShowCart(true);
   };
-  const onMouseEnter = (ind) =>{
-    setHoverRating(ind)
+  const onMouseEnter = (ind) => {
+    router.replace(router.asPath);
+    setHoverRating(ind);
   };
-  const onMouseLeave = () =>{
-    setHoverRating(0)
+  const onMouseLeave = () => {
+    setHoverRating(0);
   };
-  const onSaveRating = (ind) =>{
-    setRating(ind); setCounter((prev) => prev + 1)
+  const onSaveRating = (ind) => {
+    setRating(ind);
+    setCounter((prev) => prev + 1);
   };
 
   return (
@@ -56,16 +75,18 @@ const ProductDetails = ({ product, products }) => {
         <div className="product-detail-desc">
           <h1>{name}</h1>
           <div className="reviews">
-              {[1,2,3,4,5].map((ind) => {
-                return (
-                <Rating 
-                ind={ind}
-                rating={rating}
-                hoverRating={hoverRating}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                onSaveRating={onSaveRating} />
-              )})}
+            {[1, 2, 3, 4, 5].map((ind) => {
+              return (
+                <Rating
+                  ind={ind}
+                  rating={rating}
+                  hoverRating={hoverRating}
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  onSaveRating={onSaveRating}
+                />
+              );
+            })}
             <p>{counter}</p>
           </div>
           <h4>Details</h4>
@@ -119,35 +140,47 @@ const ProductDetails = ({ product, products }) => {
     </div>
   );
 };
-export const getStaticPaths = async () => {
-  const query = `*[_type == "product"] {
-    slug {
-      current
-    }
-  }
-  `;
-  const products = await client.fetch(query);
-  const paths = products.map((product) => ({
-    params: {
-      slug: product.slug.current,
-    },
-  }));
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+// export const getStaticPaths = async () => {
+//   const query = `*[_type == "product"] {
+//     slug {
+//       current
+//     }
+//   }
+//   `;
+//   const products = await client.fetch(query);
+//   const paths = products.map((product) => ({
+//     params: {
+//       slug: product.slug.current,
+//     },
+//   }));
 
-export const getStaticProps = async ({ params: { slug } }) => {
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// };
+
+// export const getStaticProps = async ({ params: { slug } }) => {
+//   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
+//   const productsQuery = '*[_type == "product"]';
+
+//   const product = await client.fetch(query);
+//   const products = await client.fetch(productsQuery);
+
+//   return {
+//     props: { products, product },
+//   };
+// };
+
+export const getServerSideProps = async ({ params: { slug } }) => {
   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
   const productsQuery = '*[_type == "product"]';
-
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
-
   return {
     props: { products, product },
   };
 };
+
 export default ProductDetails;
