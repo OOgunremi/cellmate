@@ -54,20 +54,20 @@ export const StateContext = ({ children }) => {
     );
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
+    toast.success(`${qty} ${product.name} added to cart`);
     if (checkProductInCart) {
       const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct._id === product._id)
-          return {
-            ...cartProduct,
-            quantity: cartProduct.quantity + quantity,
-          };
+        if (cartProduct._id === product._id) {
+          return { ...cartProduct, quantity: cartProduct.quantity + quantity };
+        }
+        return { ...cartProduct };
       });
       setCartItems(updatedCartItems);
-    } else {
-      product.quantity = quantity;
-      setCartItems([...cartItems, { ...product }]);
+      return;
     }
-    toast.success(`${qty} ${product.name} added to cart`);
+
+    product.quantity = quantity;
+    setCartItems((prev) => [...prev, { ...product }]);
   };
 
   const onRemove = (product) => {
@@ -155,6 +155,7 @@ export const StateContext = ({ children }) => {
         setAdvSearchMaxPrice,
         advSearchMinPrice,
         setAdvSearchMinPrice,
+        setQty,
       }}
     >
       {children}
