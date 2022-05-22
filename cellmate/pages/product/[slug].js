@@ -35,14 +35,14 @@ const ProductDetails = ({ product, products }) => {
         <div className="image-container">
           <div>
             <img
-              src={urlFor(image && image[index])}
+              src={image && urlFor(image[index])}
               className="product-detail-image"
             />
           </div>
           <div className="small-images-container">
             {image?.map((item, i) => (
               <img
-                src={urlFor(item)}
+                src={item && urlFor(item)}
                 key={i}
                 className={
                   i === index ? "small-image selected-image" : "small-image"
