@@ -42,25 +42,34 @@ export const StateContext = ({ children }) => {
       (item) => item._id === product._id
     );
 
+    // check that the order quantity does not exceed
+    if (
+      checkProductInCart &&
+      checkProductInCart.quantity + quantity > checkProductInCart.stock
+    ) {
+      toast.error(`Total order cannot exceed available stock. Sorry 😞`);
+      return;
+    }
+
     setTotalPrice(
       (prevTotalPrice) => prevTotalPrice + product.price * quantity
     );
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
+    toast.success(`${qty} ${product.name} added to cart`);
     if (checkProductInCart) {
       const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct._id === product._id)
-          return {
-            ...cartProduct,
-            quantity: cartProduct.quantity + quantity,
-          };
+        if (cartProduct._id === product._id) {
+          return { ...cartProduct, quantity: cartProduct.quantity + quantity };
+        }
+        return { ...cartProduct };
       });
       setCartItems(updatedCartItems);
-    } else {
-      product.quantity = quantity;
-      setCartItems([...cartItems, { ...product }]);
+      return;
     }
-    toast.success(`${qty} ${product.name} added to cart`);
+
+    product.quantity = quantity;
+    setCartItems((prev) => [...prev, { ...product }]);
   };
 
   const onRemove = (product) => {
@@ -152,6 +161,7 @@ export const StateContext = ({ children }) => {
         setRating,
         hoverRating,
         setHoverRating,
+        setQty,
       }}
     >
       {children}
