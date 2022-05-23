@@ -30,15 +30,6 @@ const Cart = () => {
   const handleCheckout = async () => {
     toast.loading("Redirecting...");
 
-    // update the stock amount in sanity
-    const sanityCheck = await fetch("/api/sanityUpdate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartItems),
-    });
-
     // process the order with stripe
     const stripe = await getStripe();
     const response = await fetch("/api/stripe", {
