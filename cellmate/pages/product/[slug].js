@@ -30,6 +30,7 @@ const ProductDetails = ({ product, products }) => {
   // force update with the server side render
   useEffect(() => {
     router.replace(router.asPath);
+    setIndex(0);
   }, []);
 
   const handleBuyNow = () => {
@@ -54,15 +55,15 @@ const ProductDetails = ({ product, products }) => {
         <div className="image-container">
           <div>
             <img
-              src={image && urlFor(image[index])}
+              src={image[index] && urlFor(image[index])}
               className="product-detail-image"
             />
           </div>
           <div className="small-images-container">
             {image?.map((item, i) => (
               <img
-                src={item && urlFor(item)}
                 key={i}
+                src={item && urlFor(item)}
                 className={
                   i === index ? "small-image selected-image" : "small-image"
                 }
