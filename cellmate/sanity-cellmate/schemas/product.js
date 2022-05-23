@@ -46,5 +46,15 @@ export default {
       title: "Stock",
       type: "number",
     },
+    {
+      name: "avgrating",
+      title: "AvgRating",
+      type: "number",
+    },
+    {
+      name: "reviews",
+      title: "Reviews",
+      type: "number",
+    },
   ],
 };

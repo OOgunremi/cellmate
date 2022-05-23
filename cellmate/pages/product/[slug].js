@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { client, urlFor } from "../../lib/client";
 import {
-  AiFillStar,
-  AiOutlineStar,
   AiOutlineMinus,
   AiOutlinePlus,
 } from "react-icons/ai";
@@ -13,16 +11,15 @@ import { useRouter } from "next/router";
 const ProductDetails = ({ product, products }) => {
   const router = useRouter();
   const [index, setIndex] = useState(0);
-  const [counter, setCounter] = useState(15);
-  const { image, name, description, price, stock } = product;
+  const { image, name, description, price, stock, avgrating, reviews } = product;
+  const [counter, setCounter] = useState(reviews);
+  const [rating, setRating] = useState(avgrating);
   const {
     incQty,
     decQty,
     qty,
     onAdd,
     setShowCart,
-    rating,
-    setRating,
     hoverRating,
     setHoverRating,
   } = useStateContext();
@@ -75,10 +72,11 @@ const ProductDetails = ({ product, products }) => {
         </div>
         <div className="product-detail-desc">
           <h1>{name}</h1>
-          <div className="reviews">
-            {[1, 2, 3, 4, 5].map((ind) => {
+          <div className="reviews"> <p>{avgrating}</p>
+            {[1, 2, 3, 4, 5].map((ind, i) => {
               return (
                 <Rating
+                  key={i}
                   ind={ind}
                   rating={rating}
                   hoverRating={hoverRating}
