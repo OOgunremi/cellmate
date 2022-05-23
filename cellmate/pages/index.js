@@ -91,7 +91,7 @@ const Home = ({ products, banners }) => {
         </div>
         <div className="products-container">
           {products
-               ?.filter((product) => product.brand.match(advSearchName) 
+               ?.filter((product) => product.name.match(advSearchName) 
                && product.brand.match(advSearchBrand) && product.price <= advSearchMaxPrice && product.price >= advSearchMinPrice)
             .map((product) => (
               <Product key={product._id} product={product} />
