@@ -25,6 +25,8 @@ const Success = () => {
     const data = await response.json();
 
     if (data.session.payment_status === "paid") {
+      runFireworks();
+
       if (cartItems.length) {
         // update the stock amount in sanity
         const sanityCheck = await fetch("/api/sanityUpdate", {
@@ -41,7 +43,6 @@ const Success = () => {
       setTotalQuantities(0);
 
       localStorage.clear();
-      runFireworks();
     }
   }, [router.isReady]);
 
