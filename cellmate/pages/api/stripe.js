@@ -30,7 +30,7 @@ export default async function handler(req, res) {
             quantity: item.quantity,
           };
         }),
-        success_url: `${req.headers.origin}/success`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/canceled`,
       };
 
@@ -41,6 +41,15 @@ export default async function handler(req, res) {
       const session = await stripe.checkout.sessions.create(params);
 
       res.status(200).json(session);
+    } catch (err) {
+      res.status(err.statusCode || 500).json(err.message);
+    }
+  } else if (req.method === "GET") {
+    try {
+      const session = await stripe.checkout.sessions.retrieve(req.query.key);
+      const customer = await stripe.customers.retrieve(session.customer);
+
+      res.status(200).json({ session, customer });
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }
