@@ -32,7 +32,7 @@ const Home = ({ products, banners }) => {
       array.push(value)
     }
     setAdvSearchInput(array)
-    console.log(array);
+    // console.log(array);
   };
 
   const { searchInput, 
