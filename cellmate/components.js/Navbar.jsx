@@ -80,7 +80,7 @@ const Navbar = () => {
           className="advance-search"
           onClick={() => setToggleAdvSearch(true)}
         >
-          Search
+          <Link href={"/"}>Search</Link>
         </button>
       )}
       {userInfo()}
